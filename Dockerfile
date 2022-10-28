@@ -1,4 +1,5 @@
-FROM alpine:3.13.2 AS builder
+# getting the alpine lastest version 
+FROM alpine:latest AS builder
 
 # Install all dependencies required for compiling busybox
 RUN apk add gcc musl-dev make perl
@@ -16,13 +17,15 @@ COPY .config .
 # Compile and install busybox
 RUN make && make install
 
-# Create a non-root user to own the files and run our server
+# Create  a  user  called  static  to  secure  running  commands  in  the  image  build  and  container 
+runtime processes
 RUN adduser -D static
 
 # Switch to the scratch image
 FROM scratch
 
-EXPOSE 3000
+#expose port 8080
+EXPOSE 8080
 
 # Copy over the user
 COPY --from=builder /etc/passwd /etc/passwd
