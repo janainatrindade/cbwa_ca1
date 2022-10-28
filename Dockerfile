@@ -40,6 +40,10 @@ WORKDIR /home/static
 # Uploads a blank default httpd.conf
 COPY httpd.conf .
 
+#static website
+RUN wget https://github.com/janainatrindade/webdev_labs/archive/refs/heads/main.zip \
+  && unzip main.zip \
+  && mv /main /home/static
 
 # Run busybox httpd
 CMD ["/busybox", "httpd", "-f", "-v", "-p", "8080", "-c", "httpd.conf"]
