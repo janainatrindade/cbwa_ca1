@@ -49,4 +49,4 @@ COPY httpd.conf .
 # COPY . .
 
 # Run busybox httpd
-CMD ["/busybox", "httpd", "-f", "-v", "-p", "3000", "-c", "httpd.conf"]
+CMD ["/busybox", "httpd", "-f", "-v", "-p", "8080", "-c", "httpd.conf"]
